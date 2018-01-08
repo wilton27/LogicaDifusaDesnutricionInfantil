@@ -1,0 +1,54 @@
+[System]
+Name='Evaluacion_desnutricion'
+Type='mamdani'
+Version=2.0
+NumInputs=3
+NumOutputs=1
+NumRules=7
+AndMethod='min'
+OrMethod='max'
+ImpMethod='min'
+AggMethod='max'
+DefuzzMethod='centroid'
+
+[Input1]
+Name='Peso'
+Range=[2 24]
+NumMFs=4
+MF1='Extremadamente_Bajo':'trapmf',[2 2 9.333 11.17]
+MF2='Muy_Bajo':'trimf',[9.333 11.17 14.83]
+MF3='Bajo':'trimf',[11.17 14.83 16.67]
+MF4='Normal':'trapmf',[14.83 16.67 24.73 30.6]
+
+[Input2]
+Name='Talla'
+Range=[45 120]
+NumMFs=3
+MF1='Bajo':'trapmf',[18 42 65 70]
+MF2='mediano':'trimf',[65 77.5 90]
+MF3='Alto':'trapmf',[85 90 123 147]
+
+[Input3]
+Name='Edad'
+Range=[0 5]
+NumMFs=2
+MF1='Bebé':'trapmf',[-4.5 -0.5 0.5 1.6]
+MF2='Niño':'trapmf',[1 1.5 5.5 9.5]
+
+[Output1]
+Name='Diagnostico'
+Range=[0 1]
+NumMFs=4
+MF1='Desnutricion__Aguda_Grave':'trapmf',[0 0 0.3 0.4]
+MF2='Desnutricion_Aguda_Moderada':'trimf',[0.297354497354497 0.397354497354497 0.547354497354497]
+MF3='Desnutricion_Aguada_Leve':'trimf',[0.4 0.55 0.65]
+MF4='No_desnutrido':'trapmf',[0.55 0.65 1.033 1.1]
+
+[Rules]
+1 1 1, 1 (1) : 1
+2 2 1, 2 (1) : 1
+3 3 2, 3 (1) : 1
+4 3 1, 4 (1) : 1
+4 3 2, 4 (1) : 1
+4 2 2, 4 (1) : 1
+1 3 2, 2 (1) : 1
